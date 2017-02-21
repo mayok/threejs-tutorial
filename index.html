@@ -32,6 +32,10 @@ function init() {
     renderer.setClearColor( 0x333f47, 1 );
   
     controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.minPolarAngle = Math.PI / 2;
+    controls.maxPolarAngle = Math.PI / 2;
 
     document.body.appendChild( renderer.domElement );
 
