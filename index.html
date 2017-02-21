@@ -8,7 +8,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
   <script src="OrbitControls.js"></script>
   <script>
-  var scene, camera, renderer;
+  var scene, camera, renderer, controls;
 var geometry, material, mesh;
 
 init();
@@ -30,6 +30,8 @@ function init() {
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.setClearColor( 0x333f47, 1 );
+  
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     document.body.appendChild( renderer.domElement );
 
@@ -42,6 +44,7 @@ function animate() {
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
 
+    controls.update();
     renderer.render( scene, camera );
 
 }
