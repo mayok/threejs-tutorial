@@ -6,7 +6,7 @@
 <body>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
-  <script src="OrbitControls.js"></script>
+  <script src="TrackballControls.js"></script>
   <script>
   var scene, camera, renderer, controls;
 var geometry, material, mesh;
@@ -32,28 +32,31 @@ function init() {
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.setClearColor( 0x333f47, 1 );
   
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enablePan = false;
-    controls.enableZoom = false;
-    controls.minPolarAngle = Math.PI / 3;
-    controls.maxPolarAngle = Math.PI / 3;
-    controls.target.set(0,0,0);
+    controls = new THREE.TrackballControls( camera );
+    controls.rotateSpeed = 1.0;
+    controls.noZoom = true;
+    controls.noPan = true;
+    controls.staticMoving = false;
+    controls.dynamicDampingFactor = 0.05;
+
+    controls.addEventListener( 'change', render );
 
     document.body.appendChild( renderer.domElement );
+  
+    render();
 
 }
 
 function animate() {
 
-    requestAnimationFrame( animate );
-
-    //mesh.rotation.x += 0.001;
-    //mesh.rotation.y += 0.002;
-
+    requestAnimationFrame(animate);
     controls.update();
-    renderer.render( scene, camera );
 
 }
+    
+    function render() {
+      renderer.render( scene, camera );
+    }
 </script>
 </body>
 </html>
